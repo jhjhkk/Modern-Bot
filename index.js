@@ -91,7 +91,7 @@ publik = true
 hit_today = [];
 healthCounts = 100
 potionawal = 1
-let lolkey = 'YouApikey' //Daftar Atau Beli Di lolhuman.xyz
+let lolkey = '5872d5ef94ed41de561a7162' //Daftar Atau Beli Di lolhuman.xyz
 
 //━━━━━━━━━━━━━━━[ AU LUPA ]━━━━━━━━━━━━━━━\\
 
