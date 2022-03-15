@@ -12,8 +12,8 @@ let {
 	processTime,
 	mentionedJid,
 	MessageType, 
-	WArssection,
-	RerssectMode,		
+	WAmodernection,
+	RemodernectMode,		
 	MessageOptions, 
 	GroupSettingChange, 	
 	WALocationMessage, 
@@ -212,7 +212,7 @@ var time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
         return dDisplay + hDisplay + mDisplay + sDisplay;
         } 
 //━━━━━━━━━━━━━━━[ MODULE EXPORTS ]━━━━━━━━━━━━━━━\\
-        module.exports = rss = async (rss, mek, _welkom) => {
+        module.exports = modern = async (modern, mek, _welkom) => {
 	    try {
         if (!mek.hasNewMessage) return 
         mek = mek.messages.all()[0]
@@ -244,16 +244,16 @@ var time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
       	const args = body.trim().split(/ +/).slice(1)
     	const isCmd = body.startsWith(prefix)
        	const v = args.join(' ')
-	    const botNumber = rss.user.jid
-	    const botNumberss = rss.user.jid + '@c.us'
+	    const botNumber = modern.user.jid
+	    const botNumbemodern = modern.user.jid + '@c.us'
 	    const isGroup = from.endsWith('@g.us')
 	    const sender = mek.key.fromMe // Fix Bug by Alazery
-        ? rss.user.jid
+        ? modern.user.jid
         : isGroup
         ? mek.participant
         : mek.key.remoteJid;
         let senderr = mek.key.fromMe
-        ? rss.user.jid
+        ? modern.user.jid
         : mek.key.remoteJid.endsWith("@g.us")
         ? mek.participant
         : mek.key.remoteJid;
@@ -261,8 +261,8 @@ var time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
      	const isOwner = OwnerNumber.includes(sender)
         const isPremium = prem.includes(sender) || isOwner
         const isPetualang = checkPetualangUser(sender)
-    	const totalchat = await rss.chats.all()
-	    const groupMetadata = isGroup ? await rss.groupMetadata(from) : ''
+    	const totalchat = await modern.chats.all()
+	    const groupMetadata = isGroup ? await modern.groupMetadata(from) : ''
 	    const groupName = isGroup ? groupMetadata.subject : ''
     	const groupId = isGroup ? groupMetadata.jid : ''		 
 	    const groupMembers = isGroup ? groupMetadata.participants : ''
@@ -276,8 +276,8 @@ var time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
      	const isEventon = isGroup ? event.includes(from) : false
         const isAnti = isGroup ? _antilink.includes(from) : false
         const isUser = pendaftar.includes(sender)
-        const conts = mek.key.fromMe ? rss.user.jid : rss.contacts[sender] || { notify: jid.replace(/@.+/, '') }
-        const pushname = mek.key.fromMe ? rss.user.name : conts.notify || conts.vname || conts.name || 'Undefinied'                  
+        const conts = mek.key.fromMe ? modern.user.jid : modern.contacts[sender] || { notify: jid.replace(/@.+/, '') }
+        const pushname = mek.key.fromMe ? modern.user.name : conts.notify || conts.vname || conts.name || 'Undefinied'                  
                                                        
 //━━━━━━━━━━━━━━━[ CONNECTION 1 ]━━━━━━━━━━━━━━━\\        
 
@@ -287,8 +287,8 @@ var time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
                     for (let lmt of _healt) {
                         if (lmt.id === sender) {
                             const healthCounts = healtawal - lmt.healt
-                            if (healthCounts <= 0) return rss.sendMessage(from,`Limit request anda sudah habis\n\n_Note : Limit akan direset setiap jam 21:00!_`, text,{ quoted: mek})
-                          //  rss.sendMessage(from, `${healthCounts}`, text, { quoted : mek})
+                            if (healthCounts <= 0) return modern.sendMessage(from,`Limit request anda sudah habis\n\n_Note : Limit akan direset setiap jam 21:00!_`, text,{ quoted: mek})
+                          //  modern.sendMessage(from, `${healthCounts}`, text, { quoted : mek})
                            if (!isPetualang) return reply(mess.only.player)
  reqXp  = 5000 * (Math.pow(2, getLevelingLevel(sender)) - 1)
 pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
@@ -329,7 +329,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
                         let obj = { id: sender, healt: 1 }
                         _healt.push(obj)
                         fs.writeFileSync('./baileys/rpg/healt.json', JSON.stringify(_healt))
-                        rss.sendMessage(from, `${healthCounts}`, text, { quoted : mek})
+                        modern.sendMessage(from, `${healthCounts}`, text, { quoted : mek})
                     }
 				}
 				
@@ -341,7 +341,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
               	let healts = i.healt
               if (healts >= healtawal ) {
               	  position = true
-                    rss.sendMessage(from, ind.limitend(pushname), text, {quoted: mek})
+                    modern.sendMessage(from, ind.limitend(pushname), text, {quoted: mek})
                     return true
               } else {
               	_healt
@@ -397,22 +397,22 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         }
 
         const reply = (teks) => {
-            rss.sendMessage(from, teks, text, {quoted:mek})
+            modern.sendMessage(from, teks, text, {quoted:mek})
         }
 
         const sendMess = (hehe, teks) => {
-            rss.sendMessage(hehe, teks, text)
+            modern.sendMessage(hehe, teks, text)
         }
 
         const mentions = (teks, memberr, id) => {
-            (id == null || id == undefined || id == false) ? rss.sendMessage(from, teks.trim(), extendedText, { contextInfo: { "mentionedJid": memberr } }) : rss.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": memberr } })
+            (id == null || id == undefined || id == false) ? modern.sendMessage(from, teks.trim(), extendedText, { contextInfo: { "mentionedJid": memberr } }) : modern.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": memberr } })
         }
         //+++ || FAKE TROLI         
         const troli =  {key: { fromMe: false,remoteJid: "status@broadcast", participant: '0@s.whatsapp.net'}, message: {orderMessage: {itemCount: 2022, status: 200, thumbnail: tamnel, surface: 200, message: `𝙎𝙀𝙇𝙁𝘽𝙊𝙏-𝙒𝘼`, orderTitle: 'LordAlazery', sellerJid: '0@s.whatsapp.net'} } }    
 
         const katalog = (teks) => {
-             res = rss.prepareMessageFromContent(from,{ "orderMessage": { "itemCount": 999999999, "message": teks, "footerText": "©rssbot", "jpegThumbnail": fs.readFileSync('./media/alazery.jpg'), "surface": 'CATALOG' }}, {quoted:troli})
-             rss.relayWAMessage(res)
+             res = modern.prepareMessageFromContent(from,{ "orderMessage": { "itemCount": 999999999, "message": teks, "footerText": "©modernbot", "jpegThumbnail": fs.readFileSync('./media/alazery.jpg'), "surface": 'CATALOG' }}, {quoted:troli})
+             modern.relayWAMessage(res)
         }
         function randomNomor(min, max = null) {
 		  if (max !== null) {
@@ -449,7 +449,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         buttons: but,
         headerType: 1
         }
-        rss.sendMessage(from, buttonMessages, buttonsMessage, {
+        modern.sendMessage(from, buttonMessages, buttonsMessage, {
         quoted: mek
         })
         }
@@ -460,7 +460,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         buttons: but,
         headerType: 1,
         };
-        rss.sendMessage(
+        modern.sendMessage(
         id,
         buttonMessage,
         MessageType.buttonsMessage,
@@ -468,7 +468,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         );
         };
         const sendButImage = async (from, context, fortext, img, but, mek) => {
-        jadinya = await rss.prepareMessage(from, img, image)
+        jadinya = await modern.prepareMessage(from, img, image)
         buttonMessagesI = {
         imageMessage: jadinya.message.imageMessage,
         contentText: context,
@@ -476,16 +476,16 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         buttons: but,
         headerType: 4
         }
-        rss.sendMessage(from, buttonMessagesI, buttonsMessage, {
+        modern.sendMessage(from, buttonMessagesI, buttonsMessage, {
         quoted: mek,
         })
         }
         async function sendButLocation(id, text1, desc1, gam1, but = [], options = {}) {
         const buttonMessages = { locationMessage: { jpegThumbnail: gam1 }, contentText: text1, footerText: desc1, buttons: but, headerType: 6 }
-        return rss.sendMessage(id, buttonMessages, MessageType.buttonsMessage, options)
+        return modern.sendMessage(id, buttonMessages, MessageType.buttonsMessage, options)
         } 
         var sendButloc = (from, title, text, desc, button, sen, men, file) => {
-        return rss.sendMessage(from, {"text": '',"contentText": title + text,"footerText": desc, "buttons": button, "headerType": "LOCATION", "locationMessage": { "degreesLongitude": "", "degreesLatitude": "", "jpegThumbnail": file}}, MessageType.buttonsMessage, { quoted: mek, contextInfo: {"mentionedJid": men ? men : []}})
+        return modern.sendMessage(from, {"text": '',"contentText": title + text,"footerText": desc, "buttons": button, "headerType": "LOCATION", "locationMessage": { "degreesLongitude": "", "degreesLatitude": "", "jpegThumbnail": file}}, MessageType.buttonsMessage, { quoted: mek, contextInfo: {"mentionedJid": men ? men : []}})
         }                                                         
         const sendMedia = async(from, url, text="", mids=[]) =>{
         if(mids.length > 0){
@@ -511,7 +511,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         if(mime.split("/")[0] === "audio"){
         mime = Mimetype.mp4Audio
         }
-        rss.sendMessage(from, media, type, { quoted: mek, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})                    
+        modern.sendMessage(from, media, type, { quoted: mek, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})                    
         fs.unlinkSync(filename)
         });
         } 
@@ -539,22 +539,22 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         if(mime.split("/")[0] === "audio"){
         mime = Mimetype.mp4Audio
         }
-        rss.sendMessage(to, media, type, { quoted: troli, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})  
+        modern.sendMessage(to, media, type, { quoted: troli, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})  
         fs.unlinkSync(filename)
         });
         }                                 
         const sendFileFromStorage = (path, type, options) => {
-        rss.sendMessage(from, fs.readFileSync(path), type, options).catch(e => {
+        modern.sendMessage(from, fs.readFileSync(path), type, options).catch(e => {
         reply('_[ ! ] Error Gagal Dalam Mengirim Media_')
         console.log(e)
         })
         }        
         const sendFileFromUrl = async(link, type, options) => {
         hasil = await getBuffer(link)
-        rss.sendMessage(from, hasil, type, options).catch(e => {
+        modern.sendMessage(from, hasil, type, options).catch(e => {
         fetch(link).then((hasil) => {
-        rss.sendMessage(from, hasil, type, options).catch(e => {
-        rss.sendMessage(from, { url : link }, type, options).catch(e => {
+        modern.sendMessage(from, hasil, type, options).catch(e => {
+        modern.sendMessage(from, { url : link }, type, options).catch(e => {
         reply('_[ ! ] Error failed to download and send media_')
         console.log(e)
         })
@@ -574,7 +574,7 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         let asw = './stik' + names + '.webp'
         exec(`ffmpeg -i ${filess} -vcodec baileyswebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${asw}`, (err) => {
         let media = fs.readFileSync(asw)
-        rss.sendMessage(to, media, MessageType.sticker,{quoted:mek})
+        modern.sendMessage(to, media, MessageType.sticker,{quoted:mek})
         fs.unlinkSync(filess)
         fs.unlinkSync(asw)
         });
@@ -648,16 +648,16 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
 		if (!isGroup) return
 		if (!isAnti) return
         if (!isBotGroupAdmins) return reply('Untung Gue bukan admin, kalo iya gua kick lu')
-        linkgc = await rss.groupInviteCode (from)
+        linkgc = await modern.groupInviteCode (from)
         if (budy.includes(`${linkwa}${linkgc}`)) return reply('Untung Link group ini')
 		if (isGroupAdmins) return reply(`Hmm mantap min`)
-		rss.updatePresence(from, Presence.composing)
+		modern.updatePresence(from, Presence.composing)
 		var Kick = `${sender.split("@")[0]}@s.whatsapp.net`
 		setTimeout( () => {
 		reply('byee')
 		}, 1100)
 		setTimeout( () => {
-		rss.groupRemove(from, [Kick]).catch((e) => {console.log(`*ERROR:* ${e}`)}) 
+		modern.groupRemove(from, [Kick]).catch((e) => {console.log(`*ERROR:* ${e}`)}) 
 					}, 1000)
 		setTimeout( () => {
 		reply(`Antilink menyala & link Group Terdeteksi maaf *${pushname}* anda akan di kick`)
@@ -672,10 +672,10 @@ pp = monospace(`📍 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿
         if (bad.includes(messagesC)) {
         if (!isGroupAdmins) {
         return reply("JAGA UCAPAN DONG!! 😠")
-        .then(() => rss.groupRemove(from, sender))
+        .then(() => modern.groupRemove(from, sender))
         .then(() => {
-        rss.sendMessage(from, `*「 ANTI BADWORD 」*\nKamu dikick karena berkata kasar!`, text ,{quoted: mek})
-        }).catch(() => rss.sendMessage(from, `Untung cya bukan admin, kalo admin udah cya kick!`, text , {quoted : mek}))
+        modern.sendMessage(from, `*「 ANTI BADWORD 」*\nKamu dikick karena berkata kasar!`, text ,{quoted: mek})
+        }).catch(() => modern.sendMessage(from, `Untung cya bukan admin, kalo admin udah cya kick!`, text , {quoted : mek}))
         } else {
         return reply( "Tolong Jaga Ucapan Min 😇")
         }
@@ -810,7 +810,7 @@ case 'misi': case 'quest':
                      }],
  listType: 1
 }
-rss.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [sender]},quoted:troli})
+modern.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [sender]},quoted:troli})
 break
 
 case 'tess':
@@ -912,13 +912,13 @@ bayarHealt(sender, 10)
           sendButLocation(from, caption, 'Memancing', cing, but, {quoted: mek})      
           }, 6000)
           setTimeout( () => {
-		  rss.sendMessage(from, 'Berhasil Mendapatkan Ikan. . .', text) 
+		  modern.sendMessage(from, 'Berhasil Mendapatkan Ikan. . .', text) 
 		  }, 5000) // 1000 = 1s,
 	      setTimeout( () => {
-		  rss.sendMessage(from, '🎣Meanarik kail. . .', text) 
+		  modern.sendMessage(from, '🎣Meanarik kail. . .', text) 
 		  }, 3000) // 1000 = 1s,
 		  setTimeout( () => {
-		  rss.sendMessage(from, '🎣Mulai memancing. . .', text) 
+		  modern.sendMessage(from, '🎣Mulai memancing. . .', text) 
 		  }, 1500) // 1000 = 1s,
 		  addFish(sender, ditangkap)
 		  addLevelingXp(sender, xp)
@@ -947,13 +947,13 @@ bayarHealt(sender, 10)
           sendButLocation(from, caption, 'Memancing', hasm, but, {quoted: mek})   
           }, 7000)
           setTimeout( () => {
-		  rss.sendMessage(from, `Awass`, text) 
+		  modern.sendMessage(from, `Awass`, text) 
 		  }, 5000) // 1000 = 1s,
 	      setTimeout( () => {
-		  rss.sendMessage(from, `Tiba tiba ada ${sesuatu}`, text) 
+		  modern.sendMessage(from, `Tiba tiba ada ${sesuatu}`, text) 
 		  }, 3000) // 1000 = 1s,
 		  setTimeout( () => {
-		  rss.sendMessage(from, `${pushname} sedang bertualang`, text) 
+		  modern.sendMessage(from, `${pushname} sedang bertualang`, text) 
 		  }, 1500) // 1000 = 1s,
 		  addLevelingXp(sender, adven)
 		  addBalance(sender, money, balance) 
@@ -980,16 +980,16 @@ bayarHealt(sender, 10)
           sendButton(from, done, 'Mining', but)
 		  }, 9000) // 1000 = 1s,
 		  setTimeout( () => {
-		  rss.sendMessage(from, '🚧 selesai menguli. . .🪙👷', text) 
+		  modern.sendMessage(from, '🚧 selesai menguli. . .🪙👷', text) 
 		  }, 7000) // 1000 = 1s,
 	      setTimeout( () => {
-		  rss.sendMessage(from, '🚧 menemukan emas. . .⚒️🏔️️️', text) 
+		  modern.sendMessage(from, '🚧 menemukan emas. . .⚒️🏔️️️', text) 
 		  }, 4000) // 1000 = 1s,
 		  setTimeout( () => {
-		  rss.sendMessage(from, '🚧 mulai menambang. . .⚒️🏔️️', text) 
+		  modern.sendMessage(from, '🚧 mulai menambang. . .⚒️🏔️️', text) 
 		  }, 1500) // 1000 = 1s,
 		  setTimeout( () => {
-		  rss.sendMessage(from, mining, text, {quoted: mek}) 
+		  modern.sendMessage(from, mining, text, {quoted: mek}) 
 		  }, 0) // 1000 = 1s,
 	      break	          
     case 'joinrpg':
@@ -998,7 +998,7 @@ bayarHealt(sender, 10)
 	   	  _petualang.push(sender)
 		  fs.writeFileSync('./baileys/data/inventori.json', JSON.stringify(_petualang))
 		  capt = `🎉Selamat ${pushname}🎊\nKamu terdaftar sebagai petualang!\nSilahkan ketik ${prefix}rpgmenu`
-		  rss.sendMessage(from, capt, text, {quoted: mek})		
+		  modern.sendMessage(from, capt, text, {quoted: mek})		
 		  addInventori(sender)
 	      addLevelingId(sender)
 		  break
@@ -1012,12 +1012,12 @@ bayarHealt(sender, 10)
 	case 'bc2': 
 		  if (!isOwner) return reply(mess.only.owner) 
 		  if (args.length < 1) return reply('.......')
-	      anu = await rss.chats.all()
+	      anu = await modern.chats.all()
 		  if (isMedia && !mek.message.videoMessage || isQuotedImage) {
 		  const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-		  buff = await rss.downloadMediaMessage(encmedia)
+		  buff = await modern.downloadMediaMessage(encmedia)
 		  for (let _ of anu) {
-		  rss.sendMessage(_.jid, buff, image, {caption: `❮ PESAN ❯\n\n${body.slice(4)}`})
+		  modern.sendMessage(_.jid, buff, image, {caption: `❮ PESAN ❯\n\n${body.slice(4)}`})
 		  }
 		  reply('*_succes broadcast_* ')
 		  } else {
@@ -1088,7 +1088,7 @@ bayarHealt(sender, 10)
 		  teks += `- ${manikgans}\n`
 		  }
 	      teks += `\n*Total : ${prem.length}*`
-		  rss.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": prem } })
+		  modern.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": prem } })
 		  break
     case "jadian":
           if (!isGroup) return reply(mess.only.group)          
@@ -1178,7 +1178,7 @@ bayarHealt(sender, 10)
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)      
           bogay = body.replace(prefix, '')
           const gtts = require('./baileys/gtts')(args[0])
-          if (args.length < 2) return rss.sendMessage(from, 'Textnya mana om', text, {quoted: mek})
+          if (args.length < 2) return modern.sendMessage(from, 'Textnya mana om', text, {quoted: mek})
           dtt = bogay.slice(8)
           ranm = getRandom('.mp3')
           dtt.length > 600 ? reply('Textnya kebanyakan om') : gtts.save(ranm, dtt, function() {
@@ -1251,10 +1251,10 @@ bayarHealt(sender, 10)
           if (args.length < 1) return reply('Teksnya?')
           reply('Otw Hack')
           tessgc = await getBuffer(`https://i.ibb.co/m4Qx3JG/20210319-204838.jpg`)
-          rss.updateProfilePicture (from, tessgc)
-          rss.groupUpdateSubject(from, `HACKED BY ${v}`)
-          rss.groupUpdateDescription(from, monospace(`_${pushname} telah meretas grup ini_\n_Diretas Pada ${wita} ${tanggal()}_\n*Tiada Lord Selain Pebri!!*`))                     
-          rss.sendMessage(from, 'Succes Hacked', text, {quoted: mek})
+          modern.updateProfilePicture (from, tessgc)
+          modern.groupUpdateSubject(from, `HACKED BY ${v}`)
+          modern.groupUpdateDescription(from, monospace(`_${pushname} telah meretas grup ini_\n_Diretas Pada ${wita} ${tanggal()}_\n*Tiada Lord Selain Pebri!!*`))                     
+          modern.sendMessage(from, 'Succes Hacked', text, {quoted: mek})
           break					
     case "term":
           if (!isOwner) return 
@@ -1285,12 +1285,12 @@ bayarHealt(sender, 10)
 • Total Pengguna : ${pendaftar.length} User
 • Hit Today : ${hit_today.length} Hit
 • Total Hit : ${totalhit} Hit
-• Browser : ${rss.browserDescription[1]}
-• Server : ${rss.browserDescription[0]}
-• Version : ${rss.browserDescription[2]}
-• Handphone : ${rss.user.phone.device_manufacturer}
+• Browser : ${modern.browserDescription[1]}
+• Server : ${modern.browserDescription[0]}
+• Version : ${modern.browserDescription[2]}
+• Handphone : ${modern.user.phone.device_manufacturer}
 • Speed :  ${latensi.toFixed(4)} Second
-• Versi Whatsapp : ${rss.user.phone.wa_version}`
+• Versi Whatsapp : ${modern.user.phone.wa_version}`
 
       //Ini SendButinImage klo pake sendButloc kadang ada yg gk respon
           but = [
@@ -1308,7 +1308,7 @@ bayarHealt(sender, 10)
           break
     case 'sewa':
           tes =`Jika ingin menyewa bot ini anda dapat chat admin di https://wa.me/6289643448422/`
-          rss.sendMessage(from, tes, text, {quoted: troli})
+          modern.sendMessage(from, tes, text, {quoted: troli})
           break  
           
 //»»»𝘉𝘶𝘵𝘵𝘰𝘯 𝘉𝘢𝘮𝘩 
@@ -1347,7 +1347,7 @@ bayarHealt(sender, 10)
           but = [
            { buttonId: `${prefix}opengc`, buttonText: { displayText: 'OPEN️' }, type: 1 },
            { buttonId: `${prefix}closegc`, buttonText: { displayText: 'CLOSE' }, type: 1 }]
-          sendButton(from, menu, 'Rs Alazery ヅ', but, troli)
+          sendButton(from, menu, 'Alazery Ofc', but, troli)
           break           
  
 //»»»𝘚𝘦𝘢𝘳𝘤𝘩𝘪𝘯𝘨 𝘔𝘦𝘯𝘶
@@ -1423,7 +1423,7 @@ bayarHealt(sender, 10)
           if (!isPremium) return reply(mess.only.prem)
           if (!isOwner && !mek.key.fromMe) return
           if (mek.key.fromMe) return reply("Tidak bisa jadibot di dalam bot");
-          jadibot(reply, rss, from);
+          jadibot(reply, modern, from);
           break;
     case "stopjadibot":
           if (mek.key.fromMe)
@@ -1442,7 +1442,7 @@ bayarHealt(sender, 10)
           if (args.length < 1) return reply('Urlnya mana kak..')
      	  anu = await fetchJson(`https://shot.screenshotapi.net/screenshot?&url=${v}`)
 	      buff = await getBuffer(anu.screenshot)
-	      rss.sendMessage(from, buff, image, {quoted: mek, caption : v})
+	      modern.sendMessage(from, buff, image, {quoted: mek, caption : v})
 	      limitAdd(sender, limit)
           break    
               	
@@ -1460,7 +1460,7 @@ bayarHealt(sender, 10)
 	case 'setthumb':
 	      if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedSticker) && args.length == 0) {
           boij = isQuotedImage || isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-		  delb = await rss.downloadMediaMessage(boij)
+		  delb = await modern.downloadMediaMessage(boij)
 		  fs.writeFileSync(`./media/alazery.jpg`, delb)
 		  reply('Sukses')
           } else {
@@ -1488,19 +1488,19 @@ bayarHealt(sender, 10)
     case 'bc': case 'broadcast':
           if (!isOwner) return  reply(mess.only.owner)
           if (args.length < 1) return reply('teks?')
-          anu = await rss.chats.all()
+          anu = await modern.chats.all()
           if (isMedia && !mek.message.videoMessage || isQuotedImage) {
           const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-          bc = await rss.downloadMediaMessage(encmedia)
+          bc = await modern.downloadMediaMessage(encmedia)
           for (let _ of anu) {
           tes = `${body.slice(4)}`
-          rss.sendMessage(_.jid, bc, { contentText: `${tes}`, footerText: `© cikobot 2K22`, buttons: [{buttonId: `${prefix}menu`,buttonText:{displayText: 'MENU'},type:1},{buttonId: `${prefix}donasi`,buttonText:{displayText:'DONASI'},type:1}],headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: tamnel, contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
+          modern.sendMessage(_.jid, bc, { contentText: `${tes}`, footerText: `© cikobot 2K22`, buttons: [{buttonId: `${prefix}menu`,buttonText:{displayText: 'MENU'},type:1},{buttonId: `${prefix}donasi`,buttonText:{displayText:'DONASI'},type:1}],headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: tamnel, contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
           }
           reply('Suksess broadcast')
           } else {
           for (let _ of anu) {
        	  textt = `${body.slice(4)}`
-          rss.sendMessage(_.jid, { contentText: `${textt}`, footerText: `${p}${wita} || ${tanggal()}${p}`, buttons: [{buttonId: `${prefix}menu`,buttonText:{displayText: 'MENU'},type:1},{buttonId: `${prefix}donasi`,buttonText:{displayText:'DONASI'},type:1}],headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: tamnel, contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
+          modern.sendMessage(_.jid, { contentText: `${textt}`, footerText: `${p}${wita} || ${tanggal()}${p}`, buttons: [{buttonId: `${prefix}menu`,buttonText:{displayText: 'MENU'},type:1},{buttonId: `${prefix}donasi`,buttonText:{displayText:'DONASI'},type:1}],headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: tamnel, contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
           }
           reply('Suksess broadcast')
           }
@@ -1512,13 +1512,13 @@ bayarHealt(sender, 10)
 		  if (!isQuotedSticker) return reply('𝗥𝗲𝗽𝗹𝘆/𝘁𝗮𝗴 𝘀𝘁𝗶𝗰𝗸𝗲𝗿 !')
 	      reply(mess.wait)
 		  encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	      media = await rss.downloadAndSaveMediaMessage(encmedia)
+	      media = await modern.downloadAndSaveMediaMessage(encmedia)
 		  ran = getRandom('.png')
 	      exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 		  fs.unlinkSync(media)
 		  if (err) return reply('Upp Sorry Failed to Convert To Sticker^_^')
 	      buffer = fs.readFileSync(ran)
-		  rss.sendMessage(from, buffer, image, {quoted: mek})
+		  modern.sendMessage(from, buffer, image, {quoted: mek})
 		  limitAdd(sender, limit)
 		  fs.unlinkSync(ran)
 		  })
@@ -1536,10 +1536,10 @@ bayarHealt(sender, 10)
           ? JSON.parse(JSON.stringify(mek).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo
           : mek;
-          owgi = await rss.downloadMediaMessage(boij);
+          owgi = await modern.downloadMediaMessage(boij);
           res = await upload(owgi);
           tek = monospace(`Type : Image\nExpired : Permanent\nServer : Telegram ph\nResult : ${res}`)
-          rss.sendMessage(from, tek, text, {quoted: mek});
+          modern.sendMessage(from, tek, text, {quoted: mek});
           limitAdd(sender, limit)
           } else {
           reply("kirim/reply gambar/video");
@@ -1565,7 +1565,7 @@ bayarHealt(sender, 10)
           ? JSON.parse(JSON.stringify(mek).replace("quotedM", "m")).message
           .extendedTextMessage.contextInfo
           : mek;
-          owgi = await rss.downloadAndSaveMediaMessage(ger);
+          owgi = await modern.downloadAndSaveMediaMessage(ger);
           webp2mp4File(owgi).then((res) => {
           sendMediaURL(from, res.result, "Done");
           limitAdd(sender, limit)
@@ -1577,9 +1577,9 @@ bayarHealt(sender, 10)
           break;			
 	case 'attp':
 	      if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
-          if (args.length == 0) return reply(`Example: ${prefix + command} rss`)
+          if (args.length == 0) return reply(`Example: ${prefix + command} modern`)
           buffer = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURI(v)}`)
-          rss.sendMessage(from, buffer, sticker, { quoted: mek })
+          modern.sendMessage(from, buffer, sticker, { quoted: mek })
           limitAdd(sender, limit)
           break;		  
 case 'sticker':
@@ -1592,7 +1592,7 @@ case ' stker':
 reply(mess.wait)
 if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-const media = await rss.downloadAndSaveMediaMessage(encmedia)
+const media = await modern.downloadAndSaveMediaMessage(encmedia)
 ran = '666.webp'
 await ffmpeg(`./${media}`)
 .input(media)
@@ -1604,7 +1604,7 @@ fs.unlinkSync(media)
 reply('error')
 })
 .on('end', function () {
-rss.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+modern.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 fs.unlinkSync(media)
 fs.unlinkSync(ran)
 })
@@ -1613,7 +1613,7 @@ fs.unlinkSync(ran)
 .save(ran)
 } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
 const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-const media = await rss.downloadAndSaveMediaMessage(encmedia)
+const media = await modern.downloadAndSaveMediaMessage(encmedia)
 ran = '999.webp'
 reply(mess.wait)
 await ffmpeg(`./${media}`)
@@ -1627,7 +1627,7 @@ tipe = media.endsWith('.mp4') ? 'video' : 'gif'
 reply(`Gagal, pada saat mengkonversi ${tipe} ke stiker`)
 })
 .on('end', function () {
-rss.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: flexx})
+modern.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: flexx})
 fs.unlinkSync(media)
 fs.unlinkSync(ran)
 })
@@ -1644,16 +1644,16 @@ break
 		  svst = body.slice(10)
 		  if (!svst) return reply('Nama videonya apa su?')
 		  boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-		  delb = await rss.downloadMediaMessage(boij)
+		  delb = await modern.downloadMediaMessage(boij)
 		  videonye.push(`${svst}`)
 		  fs.writeFileSync(`./database/video/${svst}.mp4`, delb)
 		  fs.writeFileSync('./database/video.json', JSON.stringify(videonye))
-		  rss.sendMessage(from, `Sukses Menambahkan Video\nCek dengan cara ${prefix}listvideo`, MessageType.text, { quoted: mek })
+		  modern.sendMessage(from, `Sukses Menambahkan Video\nCek dengan cara ${prefix}listvideo`, MessageType.text, { quoted: mek })
 		  break					
     case 'getvideo':
 		  namastc = body.slice(10)
 		  buffer = fs.readFileSync(`./database/video/${namastc}.mp4`)
-		  rss.sendMessage(from, buffer, video, { mimetype: 'video/mp4', quoted: mek })
+		  modern.sendMessage(from, buffer, video, { mimetype: 'video/mp4', quoted: mek })
 		  break					
 	case 'listvideo':
 	case 'videolist':
@@ -1662,13 +1662,13 @@ break
 	      teks += `- ${awokwkwk}\n`
 		  }
 		  teks += `\n*Total : ${videonye.length}*`
-		  rss.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": videonye } })
+		  modern.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": videonye } })
 		  break
     case 'getsticker':
 	case 'gets': 
 		  namastc = body.slice(12)
 		  result = fs.readFileSync(`./database/stiker/${namastc}.webp`)
-		  rss.sendMessage(from, result, sticker, {quoted :mek})
+		  modern.sendMessage(from, result, sticker, {quoted :mek})
 		  break
     case 'stickerlist':
 	case 'liststicker': 
@@ -1677,7 +1677,7 @@ break
 	  	  teks += `- ${awokwkwk}\n`
 		  }
 		  teks += `\n*Total : ${setiker.length}*`
-		  rss.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": setiker } })
+		  modern.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": setiker } })
 	      break
     case 'addsticker':
     case 'addstiker':
@@ -1685,21 +1685,21 @@ break
 	      svst = body.slice(12)
 		  if (!svst) return reply('Nama sticker nya apa?')
 		  boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-		  delb = await rss.downloadMediaMessage(boij)
+		  delb = await modern.downloadMediaMessage(boij)
 	  	  setiker.push(`${svst}`)
 	 	  fs.writeFileSync(`./database/stiker/${svst}.webp`, delb)
 		  fs.writeFileSync(`./database/stik.json`, JSON.stringify(setiker))
-	  	  rss.sendMessage(from, `Sukses Menambahkan Sticker\nCek dengan cara ${prefix}liststicker`, MessageType.text, { quoted: mek })
+	  	  modern.sendMessage(from, `Sukses Menambahkan Sticker\nCek dengan cara ${prefix}liststicker`, MessageType.text, { quoted: mek })
 	 	  break
     case 'addvn': 
 	      svst = body.slice(7)
 		  if (!svst) return reply('Nama audionya apa su?')
 	  	  boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-		  delb = await rss.downloadMediaMessage(boij)
+		  delb = await modern.downloadMediaMessage(boij)
 	  	  audionye.push(`${svst}`)
 		  fs.writeFileSync(`./database/audio/${svst}.mp3`, delb)
 		  fs.writeFileSync('./database/audio.json', JSON.stringify(audionye))
-		  rss.sendMessage(from, `Sukses Menambahkan Video\nCek dengan cara ${prefix}listvn`, MessageType.text, { quoted: mek })
+		  modern.sendMessage(from, `Sukses Menambahkan Video\nCek dengan cara ${prefix}listvn`, MessageType.text, { quoted: mek })
 		  break			
 	case 'listvn':
 	case 'vnlist': 
@@ -1708,28 +1708,28 @@ break
 		  teks += `- ${awokwkwk}\n`
 	  	  }
 		  teks += `\n*Total : ${audionye.length}*`
-		  rss.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": audionye } })
+		  modern.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": audionye } })
 		  break
     case 'getvn': 
 		  namastc = body.slice(7)
 		  buffer = fs.readFileSync(`./database/audio/${namastc}.mp3`)
-	 	  rss.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek, ptt: true })
+	 	  modern.sendMessage(from, buffer, audio, { mimetype: 'audio/mp4', quoted: mek, ptt: true })
 		  break
     case 'addimage':
 		  if (!isQuotedImage) return reply('Reply imagenya blokk!')
 		  svst = body.slice(10)
 		  if (!svst) return reply('Nama imagenya apa su?')
 		  boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-	 	  delb = await rss.downloadMediaMessage(boij)
+	 	  delb = await modern.downloadMediaMessage(boij)
 		  imagenye.push(`${svst}`)
 		  fs.writeFileSync(`./database/image/${svst}.jpeg`, delb)
 		  fs.writeFileSync('./database/image.json', JSON.stringify(imagenye))
-		  rss.sendMessage(from, `Sukses Menambahkan Video\nCek dengan cara ${prefix}listimage`, MessageType.text, { quoted: mek })
+		  modern.sendMessage(from, `Sukses Menambahkan Video\nCek dengan cara ${prefix}listimage`, MessageType.text, { quoted: mek })
 		  break					
 	case 'getimage':
 	      namastc = body.slice(10)
 		  buffer = fs.readFileSync(`./database/image/${namastc}.jpeg`)
-		  rss.sendMessage(from, buffer, image, { quoted: mek, caption: `Result From Database : ${namastc}.jpeg` })
+		  modern.sendMessage(from, buffer, image, { quoted: mek, caption: `Result From Database : ${namastc}.jpeg` })
 		  break					
     case 'imglist':
 	case 'listimg':
@@ -1738,7 +1738,7 @@ break
 		  teks += `- ${awokwkwk}\n`
 		  }
 		  teks += `\n*Total : ${imagenye.length}*`
-		  rss.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": imagenye } })
+		  modern.sendMessage(from, teks.trim(), extendedText, { quoted: mek, contextInfo: { "mentionedJid": imagenye } })
 	 	  break          
 //»»»𝘊𝘰𝘯𝘷𝘦𝘳𝘵𝘦𝘳          
     case 'tovn':           
@@ -1746,13 +1746,13 @@ break
           if (!isQuotedAudio) return reply('Reply Audionya')
           reply(mess.wait)
 	      encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	      media = await rss.downloadAndSaveMediaMessage(encmedia)
+	      media = await modern.downloadAndSaveMediaMessage(encmedia)
 		  ran = getRandom('.mp3')
 		  exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 		  fs.unlinkSync(media)
 		  if (err) return reply('Gagal mengkonversi audio ke ptt')
 		  topt = fs.readFileSync(ran)
-		  rss.sendMessage(from, topt, audio, {mimetype: 'audio/mp4', quoted: mek, ptt:true})
+		  modern.sendMessage(from, topt, audio, {mimetype: 'audio/mp4', quoted: mek, ptt:true})
 		  limitAdd(sender, limit)
 		  })
 		  break				           
@@ -1762,13 +1762,13 @@ break
           reply(mess.wait);
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
-          media = await rss.downloadAndSaveMediaMessage(encmedia);
+          media = await modern.downloadAndSaveMediaMessage(encmedia);
           ran = getRandom(".mp4");
           exec(`ffmpeg -i ${media} ${ran}`, (err) => {
           fs.unlinkSync(media);
           if (err) return fakegroup(`Err: ${err}`);
           buffer453 = fs.readFileSync(ran);
-          rss.sendMessage(from, buffer453, audio, {
+          modern.sendMessage(from, buffer453, audio, {
           mimetype: "audio/mp4",
           quoted: mek,
           });      
@@ -1782,14 +1782,14 @@ break
           reply(mess.wait);
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
-          media = await rss.downloadAndSaveMediaMessage(encmedia);
+          media = await modern.downloadAndSaveMediaMessage(encmedia);
           ran = getRandom(".mp4");
           exec(`ffmpeg -i ${media} -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2[a]" -map "[v]" -map "[a]" ${ran}`,
           (err) => {
           fs.unlinkSync(media);
           if (err) return fakegroup(`Err: ${err}`);
           buffer453 = fs.readFileSync(ran);
-          rss.sendMessage(from, buffer453, video, {
+          modern.sendMessage(from, buffer453, video, {
           mimetype: "video/mp4",
           quoted: mek,
           });
@@ -1804,14 +1804,14 @@ break
           reply(mess.wait);
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
-          media = await rss.downloadAndSaveMediaMessage(encmedia);
+          media = await modern.downloadAndSaveMediaMessage(encmedia);
           ran = getRandom(".mp4");
           exec(`ffmpeg -i ${media} -filter_complex "[0:v]setpts=2*PTS[v];[0:a]atempo=0.5[a]" -map "[v]" -map "[a]" ${ran}`,
           (err) => {
           fs.unlinkSync(media);
           if (err) return fakegroup(`Err: ${err}`);
           buffer453 = fs.readFileSync(ran);
-          rss.sendMessage(from, buffer453, video, {
+          modern.sendMessage(from, buffer453, video, {
           mimetype: "video/mp4",
           quoted: mek,
           });
@@ -1824,13 +1824,13 @@ break
           if (!isQuotedVideo) return reply("Reply videonya!");
           encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
           .message.extendedTextMessage.contextInfo;
-          media = await rss.downloadAndSaveMediaMessage(encmedia);
+          media = await modern.downloadAndSaveMediaMessage(encmedia);
           ran = getRandom(".mp4");
           exec(`ffmpeg -i ${media} -vf reverse -af areverse ${ran}`, (err) => {
           fs.unlinkSync(media);
           if (err) return fakegroup(`Err: ${err}`);
           buffer453 = fs.readFileSync(ran);
-          rss.sendMessage(from, buffer453, video, {
+          modern.sendMessage(from, buffer453, video, {
           mimetype: "video/mp4",
           quoted: mek,
           });
@@ -1842,13 +1842,13 @@ break
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
           if (!isQuotedAudio) return reply('Reply Audionya')
 	   	  encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-		  media = await rss.downloadAndSaveMediaMessage(encmedia)
+		  media = await modern.downloadAndSaveMediaMessage(encmedia)
 		  ran = getRandom('.mp3')
 		  exec(`ffmpeg -i ${media} -af equalizer=f=94:width_type=o:width=2:g=30 ${ran}`, (err, stderr, stdout) => {
 		  fs.unlinkSync(media)
 		  if (err) return reply('Error!')
 		  hah = fs.readFileSync(ran)
-		  rss.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+		  modern.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 	      fs.unlinkSync(ran)
 	      limitAdd(sender, limit)
 		  })
@@ -1857,14 +1857,14 @@ break
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
       	  if (!isQuotedAudio) return reply('Reply Audionya')
 		  night = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-		  core = await rss.downloadAndSaveMediaMessage(night)
+		  core = await modern.downloadAndSaveMediaMessage(night)
 		  ran = getRandom('.mp3')
 		  reply(mess.wait)
 		  exec(`ffmpeg -i ${core} -filter:a atempo=1.06,asetrate=44100*1.25 ${ran}`, (err, stderr, stdout) => {
 		  fs.unlinkSync(core)
 		  if (err) return reply('Error!')
 		  hah = fs.readFileSync(ran)
-		  rss.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:false, quoted: mek, ptt: true})
+		  modern.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:false, quoted: mek, ptt: true})
 		  fs.unlinkSync(ran)
 		  limitAdd(sender, limit)
 		  })
@@ -1873,13 +1873,13 @@ break
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
           if (!isQuotedAudio) return reply('Reply Audionya')
 		  encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-		  media = await rss.downloadAndSaveMediaMessage(encmedia)
+		  media = await modern.downloadAndSaveMediaMessage(encmedia)
 	      ran = getRandom('.mp3')
 		  exec(`ffmpeg -i ${media} -filter:a "atempo=1.6,asetrate=22100" ${ran}`, (err, stderr, stdout) => {
 	      fs.unlinkSync(media)
 		  if (err) return reply('Error!')
 		  hah = fs.readFileSync(ran)
-		  rss.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+		  modern.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 		  fs.unlinkSync(ran)
 		  limitAdd(sender, limit)
 	 	  })
@@ -1888,13 +1888,13 @@ break
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
           if (!isQuotedAudio) return reply('Reply Audionya')
 		  encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-		  media = await rss.downloadAndSaveMediaMessage(encmedia)
+		  media = await modern.downloadAndSaveMediaMessage(encmedia)
 		  ran = getRandom('.mp3')
 		  exec(`ffmpeg -i ${media} -filter:a "atempo=0.5,asetrate=65100" ${ran}`, (err, stderr, stdout) => {
 		  fs.unlinkSync(media)
 		  if (err) return reply('Error!')
 		  hah = fs.readFileSync(ran)
-		  rss.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+		  modern.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 		  fs.unlinkSync(ran)
 		  limitAdd(sender, limit)
 		  })
@@ -1903,13 +1903,13 @@ break
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
           if (!isQuotedAudio) return reply('Reply Audionya')
 		  encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-		  media = await rss.downloadAndSaveMediaMessage(encmedia)
+		  media = await modern.downloadAndSaveMediaMessage(encmedia)
 		  ran = getRandom('.mp3')
   	      exec(`ffmpeg -i ${media} -filter:a "atempo=0.7,asetrate=44100" ${ran}`, (err, stderr, stdout) => {
 		  fs.unlinkSync(media)
 	      if (err) return reply('Error!')
 	      hah = fs.readFileSync(ran)
-	      rss.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
+	      modern.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: mek})
 		  fs.unlinkSync(ran)
 		  limitAdd(sender, limit)
 		  })
@@ -1919,14 +1919,14 @@ break
           if (!isOwner && !mek.key.fromMe) return reply(mess.only.owner)
           if (args.length < 1) return reply('Teksnya?')
           teks = body.slice(10)
-          rss.sendMessage('status@broadcast', teks, MessageType.text)
+          modern.sendMessage('status@broadcast', teks, MessageType.text)
           reply(`Sukses upload status:\n${teks}`)
           break	
     case 'upswlokasi':
           if (!isOwner && !mek.key.fromMe) return reply(mess.only.ownerB)
           if (args.length < 1) return reply('Teksnya?')
           teks = body.slice(12)
-          rss.sendMessage('status@broadcast', {degreesLatitude: 24.121231, degreesLongitude: 55.1121221, name:teks,address:`${fakeyoi}`}, MessageType.location)
+          modern.sendMessage('status@broadcast', {degreesLatitude: 24.121231, degreesLongitude: 55.1121221, name:teks,address:`${fakeyoi}`}, MessageType.location)
           reply(`Sukses upload lokasi:\n${teks}`)
           break	
     case 'upswsticker':
@@ -1934,8 +1934,8 @@ break
           if (!isQuotedSticker) return reply('Reply stikernya!')
           if (isMedia && !mek.message.videoMessage || isQuotedSticker) {
 	      const encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-	      buff = await rss.downloadMediaMessage(encmedia)
-	 	  rss.sendMessage('status@broadcast', buff, sticker)
+	      buff = await modern.downloadMediaMessage(encmedia)
+	 	  modern.sendMessage('status@broadcast', buff, sticker)
 	      }
 		  reply(`Sukses upload sticker`)
           break
@@ -1944,8 +1944,8 @@ break
           if (!isQuotedAudio) return reply('Reply audionya!')
           if (isMedia && !mek.message.videoMessage || isQuotedAudio) {
 	      const encmedia = isQuotedAudio ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-	      buff = await rss.downloadMediaMessage(encmedia)
-	      rss.sendMessage('status@broadcast', buff, audio, {mimetype: 'audio/mp4', duration: 359996400})
+	      buff = await modern.downloadMediaMessage(encmedia)
+	      modern.sendMessage('status@broadcast', buff, audio, {mimetype: 'audio/mp4', duration: 359996400})
 		  }
 		  reply(`Sukses upload audio`)
 		  break
@@ -1954,8 +1954,8 @@ break
           if (!isQuotedAudio) return reply('Reply audionya!')
           if (isMedia && !mek.message.videoMessage || isQuotedAudio) {
 		  const encmedia = isQuotedAudio ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
-          buff = await rss.downloadMediaMessage(encmedia)
-		  rss.sendMessage('status@broadcast', buff, audio, {mimetype: 'audio/mp4', duration: 359996400, ptt: true})
+          buff = await modern.downloadMediaMessage(encmedia)
+		  modern.sendMessage('status@broadcast', buff, audio, {mimetype: 'audio/mp4', duration: 359996400, ptt: true})
 	 	  }
 		  reply(`Sukses upload voice`)
 		  break
@@ -1964,9 +1964,9 @@ break
           var konti = body.slice(11)
           reply(mess.wait)
           var enmediap = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	      var mediap = await rss.downloadAndSaveMediaMessage(enmediap)
+	      var mediap = await modern.downloadAndSaveMediaMessage(enmediap)
           const buffer3 = fs.readFileSync(mediap)
-          rss.sendMessage('status@broadcast', buffer3, MessageType.video, {duration: 359996400, caption: `${konti}`})
+          modern.sendMessage('status@broadcast', buffer3, MessageType.video, {duration: 359996400, caption: `${konti}`})
           reply(`Sukses upload video:\n${konti}`)
           break
     case 'upswgif':
@@ -1974,9 +1974,9 @@ break
           var konti = body.slice(7)
           reply(mess.wait)
           enmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	      media = await rss.downloadAndSaveMediaMessage(enmedia)
+	      media = await modern.downloadAndSaveMediaMessage(enmedia)
           const buffer6 = fs.readFileSync(media)
-          rss.sendMessage('status@broadcast', buffer6, MessageType.video, {mimetype : 'video/gif', caption: `${konti}`})
+          modern.sendMessage('status@broadcast', buffer6, MessageType.video, {mimetype : 'video/gif', caption: `${konti}`})
           reply(`Sukses upload gif:\n${konti}`)
           break
     case 'upswimage':
@@ -1984,9 +1984,9 @@ break
           var teksyy = body.slice(11)
           reply(mess.wait)
           enmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-	      media = await rss.downloadAndSaveMediaMessage(enmedia)
+	      media = await modern.downloadAndSaveMediaMessage(enmedia)
           buffer = fs.readFileSync(media)
-          rss.sendMessage('status@broadcast', buffer, MessageType.image, {quoted: mek, caption: `${teksyy}`})
+          modern.sendMessage('status@broadcast', buffer, MessageType.image, {quoted: mek, caption: `${teksyy}`})
           reply(`Sukses upload image:\n${teksyy}`)
           break		   
 //»»»𝘎𝘳𝘰𝘱 𝘔𝘦𝘯𝘶	
@@ -2063,20 +2063,20 @@ break
 	      if (!isOwner && !isGroupAdmins) return reply(mess.only.admin)
           if (!isBotGroupAdmins) return reply(`Bot Bukan Admin`)
           reply(`Sukses Membuka Grup ${groupName}`)
-		  rss.groupSettingChange(from, GroupSettingChange.messageSend, false)
+		  modern.groupSettingChange(from, GroupSettingChange.messageSend, false)
 		   break
      case 'closegc':
 		   if (!isGroup) return reply(mess.only.group)
 		   if (!isOwner && !isGroupAdmins) return reply(mess.only.admin)
            if (!isBotGroupAdmins) return reply(`Bot Bukan Admin`)
 		   reply(`Sukses Menutup Grup ${groupName}`)
-		   rss.groupSettingChange(from, GroupSettingChange.messageSend, true)
+		   modern.groupSettingChange(from, GroupSettingChange.messageSend, true)
 		   break   	 	   
      case "groupinfo": case 'gcinfo': case 'infogc':       	       
            if (!isGroup) return;
-           ppUrl = await rss.getProfilePicture(from); // leave empty to get your own
+           ppUrl = await modern.getProfilePicture(from); // leave empty to get your own
            buffergbl = await getBuffer(ppUrl);
-           rss.sendMessage(from, buffergbl, image, {
+           modern.sendMessage(from, buffergbl, image, {
            quoted: mek,
            caption: `\`\`\`「 Group Info 」\`\`\`\n\n*•> Name* : ${groupName}\n*•> Member* : ${groupMembers.length}\n*•> Admin* : ${groupAdmins.length}\n*•> Description* : \n${groupDesc}`,
            });
@@ -2087,21 +2087,21 @@ break
            if (!isBotGroupAdmins) return reply(`Bot Harus Admin dong`)
            if (args.length < 1) return reply(`Ketik *${prefix}setdesc Isi* Buat Edit Desc Grup`)
            teks = body.slice(9)
-           rss.groupUpdateDescription(from, teks)
+           modern.groupUpdateDescription(from, teks)
            break	       
    	 case 'setppgc': 
            if (!isGroup) return reply(mess.only.group)
            if (!isOwner && !isGroupAdmins) return reply(mess.only.admin)
            if (!isBotGroupAdmins) return reply(mess.only.bot)
-           media = await rss.downloadAndSaveMediaMessage(mek)
-           await rss.updateProfilePicture (from, media)
+           media = await modern.downloadAndSaveMediaMessage(mek)
+           await modern.updateProfilePicture (from, media)
            reply('[SUKSES] Mengganti icon grub')
 	  	   break
    	 case 'setname':
            if (!isGroup) return reply(mess.only.group)
     	   if (!isOwner && !isGroupAdmins) return reply(mess.only.admin)
 		   if (!isBotGroupAdmins) return reply(mess.only.bot)
-           rss.groupUpdateSubject(from, `${body.slice(9)}`)
+           modern.groupUpdateSubject(from, `${body.slice(9)}`)
            reply('Succes, Ganti Nama Grup')	  	   
  	  case 'add':
 	       if (!isGroup) return reply(mess.only.bot)
@@ -2113,7 +2113,7 @@ break
 		   if (args[0].startsWith('08')) return reply('Gunakan kode negara mas')
 		   try {
 		   num = `${args[0].replace(/ /g, '')}@s.whatsapp.net`
-		   rss.groupAdd(from, [num])
+		   modern.groupAdd(from, [num])
 	       } catch (e) {
 	  	   console.log('Error :', e)
 	 	   reply('Gagal menambahkan target, mungkin karena di private')
@@ -2132,10 +2132,10 @@ break
 		   teks += `@_.split('@')[0]`
 		   }
 		   mentions(teks, mentioned, true)
-		   rss.groupRemove(from, mentioned)
+		   modern.groupRemove(from, mentioned)
 		   } else {
 		   mentions(`asek dapat makanan,otw mengkickmu, @${mentioned[0].split('@')[0]} 🏃`, mentioned, true)
-		   rss.groupRemove(from, mentioned)
+		   modern.groupRemove(from, mentioned)
 		   }
 		   break		   
 	 case 'demote':
@@ -2151,10 +2151,10 @@ break
 	 	   teks += `@_.split('@')[0]`
 		   }
 		   mentions(teks, mentioned, true)
-	 	   rss.groupDemoteAdmin(from, mentioned)
+	 	   modern.groupDemoteAdmin(from, mentioned)
 		   } else {
 		   mentions(`YA HAHAHA  WAHYU @${mentioned[0].split('@')[0]} Jabatan adminmu di copt, Makanya jan jadi sider🏃`, mentioned, true)
-	  	   rss.groupDemoteAdmin(from, mentioned)
+	  	   modern.groupDemoteAdmin(from, mentioned)
 		   }
 	       break
 	 case 'promote':
@@ -2170,10 +2170,10 @@ break
 		   teks += `@_.split('@')[0]`
 		   }
 		   mentions(teks, mentioned, true)
-		   rss.groupMakeAdmin(from, mentioned)
+		   modern.groupMakeAdmin(from, mentioned)
 		   } else {
 		   mentions(`selamat🥳 @${mentioned[0].split('@')[0]} anda naik menjadi admin grub (+_+)`, mentioned, true)
-		   rss.groupMakeAdmin(from, mentioned)
+		   modern.groupMakeAdmin(from, mentioned)
 		   }
 		   break
      case 'revoke': case 'risetgc': case 'resetlink':
@@ -2181,13 +2181,13 @@ break
            if (!isGroup) return reply(mess.only.group)
            if (!isGroupAdmins)return reply(mess.only.admin)
            if (!isBotGroupAdmins) return reply(mess.only.bot)
-           var linkgc = await rss.revokeInvite(from)
+           var linkgc = await modern.revokeInvite(from)
            mentions(`Link Group Berhasil direset oleh admin @${sender.split('@')[0]}`, [sender], true)
            }
            break
      case 'linkgc': case 'link':
      case 'linkgroup':
-           linkgc = await rss.groupInviteCode(from)
+           linkgc = await modern.groupInviteCode(from)
            reply('https://chat.whatsapp.com/'+linkgc)  
            break         	   
      case 'join':case 'joingc':
@@ -2196,14 +2196,14 @@ break
 		   if (!isUrl(args[0]) && !args[0].includes('https://chat.whatsapp.com/')) return reply('gkvalid..')
 	       reply('Tunggu Sebentar..')
 		   link = args[0].replace('https://chat.whatsapp.com/','')
-	  	   fak = rss.query({ json: ['action', 'invite', link],
+	  	   fak = modern.query({ json: ['action', 'invite', link],
 		   expect200: true })
 		   reply('Berhasil Masuk Grup')
            break		
      case 'delete': case 'del': case 'D':
 	       if (!isGroup)return reply(mess.only.group)
 		   try {
-		   rss.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
+		   modern.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 		   } catch (e) {
 		   reply('Hanya bisa menghapus pesan dariku')
 	  	   }
@@ -2212,7 +2212,7 @@ break
           if (!isGroup) return reply(mess.only.group)
           if (!isOwner && !isGroupAdmins) return reply(mess.only.admin)
     	  var value = args.join(' ')
-		  var group = await rss.groupMetadata(from)
+		  var group = await modern.groupMetadata(from)
 		  var member = group['participants']
 		  var mem = []
     	  member.map(async adm => {
@@ -2223,7 +2223,7 @@ break
 		  contextInfo: { mentionedJid: mem },
 		  quoted: mek
 	      }
-	      rss.sendMessage(from, optionshidetag, text, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "393470602054-1351628616@g.us" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption":'#IZIN NGETAG',"fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": tamnel} }  } })
+	      modern.sendMessage(from, optionshidetag, text, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "393470602054-1351628616@g.us" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption":'#IZIN NGETAG',"fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": tamnel} }  } })
 	      break
     case 'tagall':
 		  if (!isGroup) return reply(mess.only.group)
@@ -2245,7 +2245,7 @@ break
 		  for (let mem of groupMembers) {
 	   	  members_id.push(mem.jid)
 	  	  }
-          rss.groupDemoteAdmin(from, members_id)
+          modern.groupDemoteAdmin(from, members_id)
           break
     case 'promoteall':
 		  if (!isOwner && !mek.key.fromMe) return reply(mess.only.owner)
@@ -2255,7 +2255,7 @@ break
 		  for (let mem of groupMembers) {
 	  	  members_id.push(mem.jid)
 	  	  }
-          rss.groupMakeAdmin(from, members_id)
+          modern.groupMakeAdmin(from, members_id)
           break		  	            		           
 //»»»𝘋𝘰𝘸𝘭𝘰𝘢𝘥𝘦𝘳 𝘔𝘦𝘯𝘶     	
 case 'play':
@@ -2282,7 +2282,7 @@ Judul: ${bo}
 Video Lagi Di Proses`)
 ini = await fetchJson(`https://api-yogipw.herokuapp.com/api/yt/playmp4?query=${bo}`)
 p4 = await getBuffer(ini.url)
-rss.sendMessage(from, p4, video)
+modern.sendMessage(from, p4, video)
 break
 case 'ply3':
 case 'playmp3':
@@ -2294,7 +2294,7 @@ Judul: ${bo}
 Audio Lagi Di Proses`)
 ini = await fetchJson(`https://api-yogipw.herokuapp.com/api/yt/playmp3?query=${bo}`)
 p3 = await getBuffer(ini.url)
-rss.sendMessage(from, p3, audio)
+modern.sendMessage(from, p3, audio)
 break						
     case 'ytmp4':
           if (args.length < 1) return reply('Link?')     
@@ -2302,7 +2302,7 @@ break
           get_result = await fetchJson(`http://hadi-api.herokuapp.com/api/ytvideo?url=${v}`)
           get_result = get_result.result
           ini_vid = await getBuffer(get_result.download_video)
-          await rss.sendMessage(from, ini_vid, video, { mimetype: 'video/mp4', filename: `${get_result.title}.mp4`, quoted: mek })
+          await modern.sendMessage(from, ini_vid, video, { mimetype: 'video/mp4', filename: `${get_result.title}.mp4`, quoted: mek })
           break
     case 'ytmp3':
           if (args.length < 1) return reply('Link?')         
@@ -2310,7 +2310,7 @@ break
           get_result = await fetchJson(`http://hadi-api.herokuapp.com/api/ytaudio?url=${v}`)
           get_result = get_result.result
           ini_vid = await getBuffer(get_result.download_audio)
-          await rss.sendMessage(from, ini_vid, audio, { mimetype: 'audio/mp4', filename: `${get_result.title}.mp3`, quoted: mek})          
+          await modern.sendMessage(from, ini_vid, audio, { mimetype: 'audio/mp4', filename: `${get_result.title}.mp3`, quoted: mek})          
           break          
     case 'tiktokdl': case 'ttdl': case 'tiktokmp4': case 'tiktok':    	        	    
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
@@ -2323,7 +2323,7 @@ break
           axios.get(`https://tinyurl.com/api-create.php?url=${nowm}`)
           .then(async (a) => {
     	  me = `𝘕𝘦𝘩 𝘉𝘳𝘰𝘰✔︎`
-	      rss.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
+	      modern.sendMessage(from,{url:`${nowm}`},video,{mimetype:'video/mp4',quoted:mek,caption:me})
 	      limitAdd(sender, limit)
           })
 		  })
@@ -2362,13 +2362,13 @@ break
            for (let i of result.medias) {
            if (i.url.includes("mp4")) {
            let link = await getBuffer(i.url);
-           rss.sendMessage(from, link, video, {
+           modern.sendMessage(from, link, video, {
            quoted: mek,
            caption: `Type : ${i.type}`,
            });
            } else {
            let link = await getBuffer(i.url);
-           rss.sendMessage(from, link, image, {
+           modern.sendMessage(from, link, image, {
            quoted: mek,
            caption: `Type : ${i.type}`,
            });
@@ -2399,7 +2399,7 @@ break
           let wipu = (await axios.get(`https://raw.githubusercontent.com/Arya-was/endak-tau/main/${command}.json`)).data
           let wipi = wipu[Math.floor(Math.random() * (wipu.length))]
           fs.writeFileSync(`./${sender}.jpeg`, await getBuffer(wipi))
-    	  var bb = await rss.prepareMessage(from, fs.readFileSync(`./${sender}.jpeg`), MessageType.image)
+    	  var bb = await modern.prepareMessage(from, fs.readFileSync(`./${sender}.jpeg`), MessageType.image)
           var buttonnsss = [{buttonId:`${prefix + command}`,buttonText: {displayText: 'Next️'}, type: 1}]
           var ButtonssMessages = {
           contentText: `*Antum Birahi Dengan ${command}!Tobat Brother*`,
@@ -2408,7 +2408,7 @@ break
           headerType: 4,
           imageMessage: bb.message.imageMessage
           }
-          await rss.sendMessage(from, ButtonssMessages, MessageType.buttonsMessage, {quoted : mek})
+          await modern.sendMessage(from, ButtonssMessages, MessageType.buttonsMessage, {quoted : mek})
           fs.unlinkSync(`./${sender}.jpeg`)
           limitAdd(sender, limit)
           break                 
@@ -2446,7 +2446,7 @@ break
     case 'lionlogo':      case 'wolflogo':
     case 'steel3d':       case 'wallgravity':
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
-          if (args.length == 0) return reply(`Example: ${prefix + command} rssbot`)
+          if (args.length == 0) return reply(`Example: ${prefix + command} modernbot`)
           txt1 = args[0]
           txt2 = args[1]
           getBuffer(`https://api.lolhuman.xyz/api/textprome2/${command}?apikey=${lolkey}&text1=${txt1}&text2=${txt2}`).then((gambar) => {
@@ -2470,7 +2470,7 @@ break
     case 'fallleaves':   case 'flamming':
     case 'harrypotter': case 'carvedwood':
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
-          if (args.length == 0) return reply(`Example: ${prefix + command} rssbot`)
+          if (args.length == 0) return reply(`Example: ${prefix + command} modernbot`)
           ini_txt = args.join(" ")
           getBuffer(`https://api.lolhuman.xyz/api/photooxy1/${command}?apikey=${lolkey}&text=${ini_txt}`).then((gambar) => {
           but = [
@@ -2483,7 +2483,7 @@ break
     case 'battlefield4':
     case 'pubg':
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
-          if (args.length == 0) return reply(`Example: ${prefix + command} rssbot`)
+          if (args.length == 0) return reply(`Example: ${prefix + command} modernbot`)
           txt1 = args[0]
           txt2 = args[1]      
           getBuffer(`https://api.lolhuman.xyz/api/photooxy2/${command}?apikey=${lolkey}&text1=${txt1}&text2=${txt2}`).then((gambar) => {
@@ -2510,10 +2510,10 @@ break
     case 'birthdayday':  case 'goldplaybutton':
     case 'silverplaybutton': case 'freefire':
           if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(mess.limit)
-          if (args.length == 0) return reply(`Example: ${prefix + command} Rs Botz`)
+          if (args.length == 0) return reply(`Example: ${prefix + command} AlazeryOfc`)
           ini_txt = args.join(" ")
           getBuffer(`https://api.lolhuman.xyz/api/ephoto1/${command}?apikey=${lolkey}&text=${ini_txt}`).then((gambar) => {
-          rss.sendMessage(from, gambar, image, { quoted: mek })
+          modern.sendMessage(from, gambar, image, { quoted: mek })
           limitAdd(sender, limit)
           })
           break
@@ -2772,7 +2772,7 @@ break
           but = [
            { buttonId: `!owner`, buttonText: { displayText: 'ᴏᴡɴᴇʀ️' }, type: 1 },
            { buttonId: `!sewa`, buttonText: { displayText: 'sᴇᴡᴀ' }, type: 1 }]
-          sendButton(from, pp, 'CopyRight Rs Alazery ヅ', but, troli)
+          sendButton(from, pp, 'CopyRight Al\'azery Ofc', but, troli)
           break         
 
 case 'owner':
@@ -2784,14 +2784,14 @@ vcard3 = 'BEGIN:VCARD\n' +
             `item1.X-ABLabel:👑 Creator\n` +
             `item2.EMAIL;type=INTERNET:alazery.id@gmail.com\n` +
             `item2.X-ABLabel:📧 Email\n` +
-            `item3.URL:https://youtube.com/c/alazery/\n` +
+            `item3.URL:https://youtube.com/c/alazeryofc/\n` +
             `item3.X-ABLabel:⚙️ Channel Owner\n` +
             `item4.ADR:;;🇮🇩 Indonesia;;;;\n` +
             `item4.X-ABADR:ac\n` +
             `item4.X-ABLabel:🌍 Region\n` +
-            `item5.X-ABLabel:⚔️ Rs - Botz Owner\n` +
+            `item5.X-ABLabel:⚔️ Alazery OFC\n` +
             'END:VCARD'.trim()
-rss.sendMessage(from, {displayName: `Creator Alazery`, vcard: vcard3}, contact, 
+modern.sendMessage(from, {displayName: `Owner`, vcard: vcard3}, contact, 
 { quoted: troli, 
 })
 break
@@ -2800,12 +2800,12 @@ break
           if (isSimi && bodi != undefined){
           res = await axios.get(`https://api-sv2.simsimi.net/v2/?text=${bodi}&lc=id`)
           pp = res.data.success
-          rss.sendMessage(from, pp, text)
+          modern.sendMessage(from, pp, text)
           }
           if (isCmd) {      
           menu = monospace(`Maaf kak ${pushname}_<\nCommand ${command} Tidak tersedia di list menu!!\nMohon cek kembali list menu nya kak`)
           but = [{ buttonId: `!menu`, buttonText: { displayText: 'MENU' }, type: 1 }]
-          sendButton(from, menu, 'Created By Rs Botz', but, mek)
+          sendButton(from, menu, 'Created By Alazery OFC', but, mek)
           break
           }
               
@@ -2821,7 +2821,7 @@ break
 		  } else if (budy.startsWith('x')) {
 console.log(color('[EVAL2]'), color(moment(mek.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`eval identy`))
 		  try {
-	 	  return rss.sendMessage(from, JSON.stringify(eval(budy.slice(2)), null, '\t'), text, { quoted: mek })
+	 	  return modern.sendMessage(from, JSON.stringify(eval(budy.slice(2)), null, '\t'), text, { quoted: mek })
 	      } catch (err) {
 		  e = String(err)
 		  reply(e)
